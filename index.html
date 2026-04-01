@@ -1,0 +1,930 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Click2Cart – Best Amazon Product Reviews & Deals</title>
+<meta name="description" content="Expert Amazon product reviews, comparisons, and buying guides. Find the best deals with honest recommendations.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/*============================================
+  CONFIGURATION — EDIT YOUR AFFILIATE TAG HERE
+==============================================*/
+/* Your Amazon affiliate tag is set in the JS section below */
+
+:root {
+  --primary: #FF9900;       /* Amazon orange */
+  --primary-dark: #e68800;
+  --accent: #146EB4;        /* Amazon blue */
+  --accent2: #00a650;       /* Green for ratings/trust */
+  --bg: #f7f5f0;
+  --white: #ffffff;
+  --card-bg: #ffffff;
+  --text: #1a1a2e;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.13);
+  --radius: 14px;
+  --nav-h: 68px;
+}
+
+/* --- Global Reset & Basics --- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  line-height:1.65;
+  overflow-x:hidden;
+}
+
+/* ---- SCROLLBAR ---- */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:#f1f1f1;}
+::-webkit-scrollbar-thumb{background:var(--primary);border-radius:3px;}
+
+/* ---- TOP DISCLOSURE BAR ---- */
+.disclosure-bar{
+  background:var(--accent);
+  color:#fff;
+  text-align:center;
+  padding:10px 16px;
+  font-size:0.8rem;
+  font-weight:500;
+  letter-spacing:0.2px;
+}
+.disclosure-bar a{color:#ffe082;text-decoration:underline;}
+
+/* ---- NAV ---- */
+nav{
+  position:sticky;top:0;z-index:200;
+  background:#fff;
+  box-shadow:0 1px 0 var(--border), 0 4px 20px rgba(0,0,0,0.05);
+  height:var(--nav-h);
+  display:flex;align-items:center;
+}
+.nav-inner{
+  max-width:1200px;margin:0 auto;width:100%;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;gap:24px;
+}
+.logo{
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;
+  font-weight:800;
+  color:var(--text);
+  text-decoration:none;
+  white-space:nowrap;
+}
+.logo span{color:var(--primary);}
+
+.search-wrap{
+  flex:1;max-width:440px;
+  position:relative;
+}
+.search-input{
+  width:100%;
+  background:#f3f4f6;
+  border:1.5px solid var(--border);
+  border-radius:100px;
+  padding:10px 44px 10px 18px;
+  font-family:inherit;
+  font-size:0.92rem;
+  color:var(--text);
+  outline:none;
+  transition:border-color 0.2s,box-shadow 0.2s;
+}
+.search-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(255,153,0,0.15);}
+.search-btn{
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;
+  color:var(--muted);font-size:1.1rem;
+  line-height:1;padding:0;
+}
+
+.nav-links{display:flex;gap:6px;list-style:none;align-items:center;}
+.nav-links a{
+  color:var(--muted);text-decoration:none;
+  font-size:0.88rem;font-weight:600;
+  padding:7px 14px;border-radius:8px;
+  transition:background 0.15s,color 0.15s;
+  white-space:nowrap;
+}
+.nav-links a:hover{background:#fff3e0;color:var(--primary);}
+.nav-links a.active{color:var(--primary);}
+.hamburger{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--text);}
+
+/* ---- MOBILE MENU ---- */
+.mobile-nav{
+  position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;
+  background:#fff;z-index:190;
+  padding:32px 24px;
+  display:none;flex-direction:column;gap:12px;
+  overflow-y:auto;
+}
+.mobile-nav a{
+  font-size:1.2rem;font-weight:700;color:var(--text);
+  text-decoration:none;padding:16px;border-bottom:1px solid #eee;
+}
+
+/* ---- HERO ---- */
+.hero{
+  background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);
+  color:#fff;
+  padding:80px 24px 90px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,153,0,0.2);
+  border:1px solid rgba(255,153,0,0.4);
+  color:#FFB800;
+  padding:6px 18px;border-radius:100px;
+  font-size:0.8rem;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:24px;
+  animation:fadeUp 0.6s ease both;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,5vw,4rem);
+  font-weight:800;line-height:1.1;
+  max-width:760px;margin:0 auto 20px;
+  animation:fadeUp 0.7s 0.1s ease both;
+}
+.hero h1 em{font-style:normal;color:var(--primary);}
+.hero-sub{
+  max-width:540px;margin:0 auto 40px;
+  color:rgba(255,255,255,0.7);
+  font-size:1.05rem;font-weight:300;
+  animation:fadeUp 0.7s 0.2s ease both;
+}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* ---- TRUST SIGNALS BAR ---- */
+.trust-bar{
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  padding:16px 24px;
+}
+.trust-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;justify-content:center;align-items:center;
+  gap:36px;flex-wrap:wrap;
+}
+.trust-item{
+  display:flex;align-items:center;gap:8px;
+  font-size:0.85rem;font-weight:600;color:var(--muted);
+}
+.trust-item span{color:var(--primary);font-size:1rem;}
+
+/* ---- SECTION BASICS ---- */
+section{padding:72px 24px;}
+.container{max-width:1200px;margin:0 auto;}
+.section-header{text-align:center;margin-bottom:56px;}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:2.4rem;font-weight:800;margin-bottom:16px;
+}
+.section-title em{font-style:normal;color:var(--primary);}
+.section-subtitle{color:var(--muted);max-width:600px;margin:0 auto;}
+
+/* ---- CATEGORY TABS ---- */
+.tabs-wrap{
+  display:flex;justify-content:center;gap:12px;
+  margin-bottom:44px;flex-wrap:wrap;
+}
+.tab-btn{
+  background:#fff;border:1.5px solid var(--border);
+  padding:10px 20px;border-radius:100px;
+  font-weight:700;font-size:0.85rem;cursor:pointer;
+  transition:all 0.2s;color:var(--muted);
+}
+.tab-btn:hover{border-color:var(--primary);color:var(--primary);}
+.tab-btn.active{background:var(--primary);border-color:var(--primary);color:#fff;box-shadow:0 4px 12px rgba(255,153,0,0.3);}
+
+/* ---- PRODUCT CARDS ---- */
+.products-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:24px;
+}
+.product-card{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  transition:transform 0.25s,box-shadow 0.25s;
+  display:flex;flex-direction:column;
+  position:relative;
+}
+.product-card:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--shadow-lg);
+}
+.p-badge{
+  position:absolute;top:14px;left:14px;z-index:5;
+  background:var(--accent);color:#fff;
+  padding:5px 12px;border-radius:6px;
+  font-size:0.7rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:0.5px;
+}
+.p-badge.best-seller{background:var(--primary);}
+
+.p-img-box{
+  width:100%;aspect-ratio:1/1;
+  background:#fff;display:flex;align-items:center;justify-content:center;
+  padding:24px;overflow:hidden;
+  border-bottom:1px solid #f3f4f6;
+}
+.p-img-box img{
+  max-width:100%;max-height:100%;
+  object-fit:contain;
+  transition:transform 0.4s ease;
+}
+.product-card:hover .p-img-box img{transform:scale(1.06);}
+
+.p-content{padding:24px;flex:1;display:flex;flex-direction:column;}
+.p-cat{font-size:0.75rem;font-weight:700;color:var(--primary);text-transform:uppercase;margin-bottom:8px;}
+.p-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.15rem;font-weight:800;line-height:1.3;
+  margin-bottom:12px;color:var(--text);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.p-meta{
+  display:flex;align-items:center;gap:10px;margin-bottom:18px;
+  font-size:0.85rem;font-weight:600;
+}
+.p-rating{color:#fbbf24;display:flex;align-items:center;gap:4px;}
+.p-reviews{color:var(--muted);font-weight:400;}
+
+.p-price-row{
+  display:flex;align-items:baseline;gap:10px;margin-bottom:20px;
+}
+.p-price{font-size:1.5rem;font-weight:800;color:var(--text);}
+.p-orig{font-size:0.95rem;text-decoration:line-through;color:var(--muted);}
+
+.p-features{
+  list-style:none;margin-bottom:24px;
+}
+.p-features li{
+  font-size:0.85rem;color:var(--muted);
+  display:flex;align-items:center;gap:8px;margin-bottom:6px;
+}
+.p-features li::before{content:'✓';color:var(--accent2);font-weight:900;}
+
+.btn-amazon{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;
+  background:linear-gradient(135deg,#FFB700,#FF9900);
+  color:#111;
+  font-weight:700;text-decoration:none;
+  padding:13px 20px;border-radius:9px;
+  font-size:0.95rem;
+  transition:filter 0.2s, transform 0.1s;
+}
+.btn-amazon:hover{filter:brightness(1.05);}
+.btn-amazon:active{transform:scale(0.98);}
+
+/* ---- LOAD MORE BUTTON ---- */
+.load-more-wrap{
+  text-align:center;
+  margin-top:48px;
+}
+.btn-load-more{
+  background:#fff;
+  border:2px solid var(--primary);
+  color:var(--primary);
+  font-family:inherit;
+  font-size:0.95rem;
+  font-weight:700;
+  padding:14px 40px;
+  border-radius:100px;
+  cursor:pointer;
+  transition:all 0.2s;
+  display:inline-flex;align-items:center;gap:10px;
+}
+.btn-load-more:hover{background:var(--primary);color:#fff;box-shadow:0 4px 16px rgba(255,153,0,0.35);}
+.btn-load-more:disabled{opacity:0.4;cursor:not-allowed;}
+.load-more-info{
+  margin-top:14px;
+  font-size:0.85rem;
+  color:var(--muted);
+  font-weight:500;
+}
+
+/* ---- COMPARISON TABLE ---- */
+.compare-wrap{
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  overflow-x:auto;box-shadow:var(--shadow);
+}
+table{width:100%;border-collapse:collapse;min-width:700px;}
+th{background:#f9fafb;text-align:left;padding:20px;font-size:0.9rem;border-bottom:2px solid var(--border);}
+td{padding:20px;border-bottom:1px solid var(--border);vertical-align:middle;}
+.comp-p-info{display:flex;align-items:center;gap:15px;}
+.comp-p-img{width:50px;height:50px;object-fit:contain;}
+.comp-p-name{font-weight:700;font-size:0.95rem;}
+
+/* ---- DISCLOSURE MODAL ---- */
+#disclosure{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1000;align-items:center;justify-content:center;padding:24px;}
+#disclosure:target{display:flex;}
+.modal-content{
+  background:#fff;max-width:500px;padding:32px;border-radius:var(--radius);
+  position:relative;line-height:1.6;
+}
+.modal-close{position:absolute;top:16px;right:16px;text-decoration:none;font-size:1.5rem;color:var(--muted);}
+
+/* ---- FOOTER ---- */
+footer{
+  background:#1a1a2e;color:rgba(255,255,255,0.7);
+  padding:56px 24px 32px;
+}
+.footer-grid{
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:48px;
+}
+.footer-brand .logo{color:#fff;margin-bottom:20px;display:inline-block;}
+.footer-brand p{font-size:0.9rem;margin-bottom:24px;line-height:1.7;}
+.footer-head{color:#fff;font-weight:700;margin-bottom:20px;font-size:1rem;}
+.footer-links{list-style:none;}
+.footer-links li{margin-bottom:12px;}
+.footer-links a{color:inherit;text-decoration:none;font-size:0.9rem;transition:color 0.2s;}
+.footer-links a:hover{color:var(--primary);}
+
+.footer-bottom{
+  max-width:1200px;margin:48px auto 0;
+  padding-top:32px;border-top:1px solid rgba(255,255,255,0.1);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:0.85rem;
+}
+
+.price-disclaimer{
+  max-width:1200px;margin:32px auto 0;
+  padding:14px 20px;
+  border-radius:10px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  font-size:0.82rem;
+  color:rgba(255,255,255,0.5);
+  text-align:center;
+  line-height:1.6;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.price-disclaimer span{font-size:1rem;flex-shrink:0;}
+
+/* ---- ANIMATIONS ---- */
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.8s ease-out;}
+.reveal.active{opacity:1;transform:translateY(0);}
+
+/* ---- RESPONSIVE ---- */
+
+/* Tablet */
+@media(max-width:992px){
+  .footer-grid{grid-template-columns:1fr 1fr;gap:40px;}
+  .products-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr));}
+}
+
+/* Mobile & iPhone */
+@media(max-width:768px){
+
+  /* Nav */
+  .nav-links{display:none;}
+  .hamburger{display:block;}
+  .search-wrap{max-width:100%;}
+  .nav-inner{gap:12px;}
+
+  /* Hero */
+  .hero{padding:52px 20px 60px;}
+  .hero h1{font-size:clamp(1.7rem,7vw,2.6rem);}
+  .hero-sub{font-size:0.95rem;}
+
+  /* Trust bar */
+  .trust-inner{gap:16px;}
+  .trust-item{font-size:0.78rem;}
+
+  /* Section */
+  section{padding:48px 16px;}
+  .section-title{font-size:1.8rem;}
+
+  /* Category tabs — scrollable row on mobile */
+  .tabs-wrap{
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    justify-content:flex-start;
+    padding-bottom:8px;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .tabs-wrap::-webkit-scrollbar{display:none;}
+  .tab-btn{white-space:nowrap;flex-shrink:0;}
+
+  /* Product grid — 2 columns on phones */
+  .products-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+  }
+  .p-img-box{padding:16px;}
+  .p-content{padding:14px;}
+  .p-title{font-size:0.95rem;}
+  .p-price{font-size:1.2rem;}
+  .p-features{display:none;}
+  .btn-amazon{padding:11px 14px;font-size:0.85rem;}
+
+  /* Load more */
+  .btn-load-more{padding:13px 28px;font-size:0.9rem;}
+
+  /* Compare table */
+  .compare-wrap{font-size:0.85rem;}
+  th,td{padding:14px 12px;}
+
+  /* Footer */
+  .footer-grid{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;gap:20px;text-align:center;}
+}
+
+/* Very small phones (iPhone SE, Galaxy A series) */
+@media(max-width:400px){
+  .products-grid{grid-template-columns:1fr;}
+  .hero h1{font-size:1.6rem;}
+  .logo{font-size:1.3rem;}
+  .section-title{font-size:1.5rem;}
+}
+
+/* iPhone notch & safe area support */
+@supports(padding:max(0px)){
+  .disclosure-bar{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right));}
+  nav{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);}
+  footer{padding-bottom:max(32px,env(safe-area-inset-bottom));}
+}
+
+/* Smooth touch — remove tap blue flash on iOS */
+*{-webkit-tap-highlight-color:transparent;}
+a,button{touch-action:manipulation;}
+</style>
+</head>
+<body>
+
+<div class="disclosure-bar">
+  ⚠️ <strong>Affiliate Disclosure:</strong>  Click2Cart is reader-supported. When you click an Amazon link and make a purchase, we may earn a small commission at no extra cost to you. <a href="#disclosure">Learn more</a>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">Click<span>2</span>Cart</a>
+    <div class="search-wrap">
+      <input type="text" class="search-input" id="searchInput" placeholder="Search products..." autocomplete="off" spellcheck="false">
+      <button class="search-btn" id="searchClearBtn" style="display:none;font-size:1rem;" onclick="clearSearch()">✕</button>
+      <button class="search-btn" id="searchIconBtn">🔍</button>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#products">Products</a></li>
+      <li><a href="#compare">Compare</a></li>
+      <li><a href="#deals">Today's Deals</a></li>
+    </ul>
+    <button class="hamburger" onclick="toggleMobileNav()">☰</button>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#products" onclick="toggleMobileNav()">Products</a>
+  <a href="#compare" onclick="toggleMobileNav()">Compare</a>
+  <a href="#deals" onclick="toggleMobileNav()">Today's Deals</a>
+</div>
+
+<section class="hero" id="home">
+  <div class="hero-badge">🛒 Updated March 2026 · Expert Reviews</div>
+  <h1>Buy Smarter On Amazon  <em>We Find The Best Deals </em><br>For You.</h1>
+  <p class="hero-sub">Every product featured here is selected after reviewing real customer feedback, ratings, features, and value — so you don't have to. We research many products so you can shop smarter.
+.</p>
+  <a href="#products" class="tab-btn active" style="padding:16px 32px;font-size:1rem;">Explore Best Sellers</a>
+</section>
+
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item"><span>🔄</span> Updated regularly</div>
+    <div class="trust-item"><span>🛡️</span> 100% Honest</div>
+  </div>
+</div>
+
+<section class="products-section" id="products">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2 class="section-title">Our <em>Recommended</em> Products</h2>
+      <p class="section-subtitle">We've handpicked these products based on performance, price, and thousands of user reviews.</p>
+    </div>
+
+    <div class="tabs-wrap reveal">
+      <button class="tab-btn active" onclick="filterProducts('all', this)">All Products</button>
+      <button class="tab-btn" onclick="filterProducts('Home & Kitchen', this)">Home & Kitchen</button>
+      <button class="tab-btn" onclick="filterProducts('Outdoor Products', this)">Outdoor Products</button>
+      <button class="tab-btn" onclick="filterProducts('Smart Home Security & Automation', this)">Smart Home Security & Automation</button>
+      <button class="tab-btn" onclick="filterProducts('Pet Accessories', this)">Pet Accessories</button>
+      <button class="tab-btn" onclick="filterProducts('Electronics', this)">Electronics</button>
+      <button class="tab-btn" onclick="filterProducts('Sustainable Products', this)">Sustainable Products</button>
+    </div>
+
+    <div class="products-grid" id="productsGrid"></div>
+
+    <!-- NO RESULTS MESSAGE -->
+    <div id="noResults" style="display:none;text-align:center;padding:60px 20px;">
+      <div style="font-size:3rem;margin-bottom:16px;">🔍</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:10px;">No products found</h3>
+      <p style="color:var(--muted);margin-bottom:24px;">Try a different keyword or browse by category above.</p>
+      <button onclick="clearSearch()" style="background:var(--primary);color:#fff;border:none;padding:12px 28px;border-radius:100px;font-weight:700;font-size:0.95rem;cursor:pointer;">Clear Search</button>
+    </div>
+
+    <!-- LOAD MORE CONTROLS -->
+    <div class="load-more-wrap" id="loadMoreWrap">
+      <button class="btn-load-more" id="loadMoreBtn" onclick="loadMore()">
+        Load More Products
+        <span>↓</span>
+      </button>
+      <p class="load-more-info" id="loadMoreInfo"></p>
+    </div>
+
+  </div>
+</section>
+
+<section id="compare" style="background:#fff;">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2 class="section-title">Quick <em>Comparison</em></h2>
+      <p class="section-subtitle">A side-by-side look at the top contenders in our list.</p>
+    </div>
+    <div class="compare-wrap reveal">
+      <table>
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Rating</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="compareBody">
+          </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo">Click<span>2</span>Cart</a>
+      <p>Click2Cart is your trusted destination for in-depth Amazon product analysis. Our mission is to simplify your shopping experience with data-driven insights.</p>
+      <div id="footerSocials" style="display:flex;gap:12px;">
+          </div>
+    </div>
+    <div>
+      <h4 class="footer-head">Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#compare">Comparison</a></li>
+        <li><a href="#deals">Deals</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer-head">Categories</h4>
+      <ul class="footer-links">
+        <li><a href="#">Home & Kitchen</a></li>
+        <li><a href="#">Electronics</a></li>
+        <li><a href="#">Health & Household</a></li>
+        <li><a href="#">Tools</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer-head">Support</h4>
+      <ul class="footer-links">
+        <li><a href="#disclosure">Affiliate Disclosure</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="price-disclaimer">
+    <span>⚠️</span>
+    Prices displayed on this site are provided for reference and may not reflect real-time updates. Final pricing is shown on Amazon at checkout.
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Click2Cart. All rights reserved. Built for Smart Shoppers.</span>
+    <span></span>
+  </div>
+</footer>
+
+<div id="disclosure">
+  <div class="modal-content">
+    <a href="#" class="modal-close">×</a>
+    <h3 style="margin-bottom:16px;">Affiliate Disclosure</h3>
+    <p>In compliance with the FTC guidelines, please assume that any links on this website are affiliate links. If you click on these links and visit Amazon.com, we may receive a small commission from your purchases. This does not result in any additional cost to you.</p>
+    <p style="margin-top:12px;">Our reviews are based on objective analysis and testing. Your support helps us keep the site running and provides the best recommendations possible.</p>
+  </div>
+</div>
+
+<script>
+/*============================================
+  DATA & CONFIGURATION
+==============================================*/
+const AFFILIATE_TAG = 'click2cart-20'; 
+
+// Updated with your TikTok profile link
+const SOCIAL_LINKS = {
+  youtube:   "https://youtube.com/@click2cartnow?si=_gXuwMsFE9usV7K8",   
+  facebook:  "https://www.facebook.com/profile.php?id=61586475624835",   
+  instagram: "https://www.instagram.com/click2cart_77/",   
+  pinterest: "https://www.pinterest.com/click2cart_77/",   
+  tiktok:    "https://www.tiktok.com/@click2shopnow1" 
+};
+
+/*============================================
+  ADD ALL YOUR PRODUCTS HERE
+  You can add 1500+ products — the page will
+  stay smooth by only showing 24 at a time.
+==============================================*/
+let products = [
+  {
+    id: 1,
+    name: "InnoGear Essential Oil Diffuser Set",
+    cat: "Electronics",
+    price: "$29.99",
+    orig: "$37.99",
+    rating: 4.5,
+    rcount: "3846",
+    asin: "https://amzn.to/3PFm7OP",
+    img: "https://m.media-amazon.com/images/I/819yNDo0IgL._AC_SL1500_.jpg",
+    badge: "best-seller",
+    features: ["Includes 10 pure essential oils","7 colorful LED light modes","Whisper-quiet tech"]
+  },
+
+  // ↓↓↓ ADD MORE PRODUCTS BELOW THIS LINE ↓↓↓
+  // Copy and paste the block above and fill in the details.
+  // Example:
+  // {
+  //   id: 2,
+  //   name: "Your Product Name",
+  //   cat: "Electronics",         // Must match a tab category
+  //   price: "$49.99",
+  //   orig: "$69.99",             // Optional original price
+  //   rating: 4.5,
+  //   rcount: "12,000",
+  //   asin: "https://amzn.to/XXXXX",  // Your Amazon affiliate link
+  //   img: "https://...image-url...",
+  //   badge: "best-seller",       // Options: "best-seller", "new", "top-pick", or remove line
+  //   features: ["Feature one","Feature two","Feature three"]
+  // },
+];
+
+/*============================================
+  PAGINATION ENGINE — DO NOT EDIT BELOW
+  This makes 1500+ products run smoothly.
+==============================================*/
+const PAGE_SIZE = 24; // Cards shown per load
+let currentPage = 0;
+let activeList = [];
+
+function buildAmazonLink(asin) {
+  if (asin.startsWith('http')) {
+    return asin + (asin.includes('?') ? '&' : '?') + 'tag=' + AFFILIATE_TAG;
+  }
+  return `https://www.amazon.com/dp/${asin}?tag=${AFFILIATE_TAG}`;
+}
+
+function cardHTML(p) {
+  return `
+    <div class="product-card reveal active">
+      ${p.badge ? `<div class="p-badge ${p.badge.replace(/ /g,'-')}">${p.badge}</div>` : ''}
+      <div class="p-img-box">
+        <img src="${p.img}" alt="${p.name}" loading="lazy" decoding="async">
+      </div>
+      <div class="p-content">
+        <div class="p-cat">${p.cat}</div>
+        <h3 class="p-title">${p.name}</h3>
+        <div class="p-meta">
+          <div class="p-rating">★ ${p.rating}</div>
+          <div class="p-reviews">(${p.rcount} reviews)</div>
+        </div>
+        <div class="p-price-row">
+          <span class="p-price">${p.price}</span>
+          ${p.orig ? `<span class="p-orig">${p.orig}</span>` : ''}
+        </div>
+        <ul class="p-features">
+          ${p.features.map(f => `<li>${f}</li>`).join('')}
+        </ul>
+        <a href="${buildAmazonLink(p.asin)}" target="_blank" rel="noopener" class="btn-amazon">
+          View on Amazon
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+      </div>
+    </div>`;
+}
+
+function renderProducts(list) {
+  // Reset pagination state with a new product list
+  activeList = list;
+  currentPage = 0;
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML = '';
+  appendNextPage();
+  updateLoadMoreUI();
+}
+
+function appendNextPage() {
+  const grid = document.getElementById('productsGrid');
+  const start = currentPage * PAGE_SIZE;
+  const end = Math.min(start + PAGE_SIZE, activeList.length);
+  const fragment = document.createDocumentFragment();
+  for (let i = start; i < end; i++) {
+    const div = document.createElement('div');
+    div.innerHTML = cardHTML(activeList[i]);
+    fragment.appendChild(div.firstElementChild);
+  }
+  grid.appendChild(fragment);
+  currentPage++;
+}
+
+function loadMore() {
+  appendNextPage();
+  updateLoadMoreUI();
+}
+
+function updateLoadMoreUI() {
+  const shown = Math.min(currentPage * PAGE_SIZE, activeList.length);
+  const total = activeList.length;
+  const btn = document.getElementById('loadMoreBtn');
+  const info = document.getElementById('loadMoreInfo');
+  const wrap = document.getElementById('loadMoreWrap');
+
+  if (total === 0) {
+    wrap.style.display = 'none';
+    return;
+  }
+  wrap.style.display = 'block';
+  info.textContent = `Showing ${shown} of ${total} products`;
+
+  if (shown >= total) {
+    btn.style.display = 'none';
+    info.textContent = `All ${total} products shown`;
+  } else {
+    btn.style.display = 'inline-flex';
+    btn.textContent = `Load More Products ↓`;
+  }
+}
+
+function renderCompare(list) {
+  // Comparison table always shows first 10 products max for readability
+  const display = list.slice(0, 10);
+  const body = document.getElementById('compareBody');
+  body.innerHTML = display.map(p => `
+    <tr>
+      <td>
+        <div class="comp-p-info">
+          <img src="${p.img}" class="comp-p-img" loading="lazy">
+          <span class="comp-p-name">${p.name}</span>
+        </div>
+      </td>
+      <td>${p.cat}</td>
+      <td><div class="p-rating" style="font-weight:700;">★ ${p.rating}</div></td>
+      <td style="font-weight:800;">${p.price}</td>
+      <td><a href="${buildAmazonLink(p.asin)}" target="_blank" style="color:var(--primary); font-weight:700; text-decoration:none;">View Deal →</a></td>
+    </tr>
+  `).join('');
+}
+
+function renderSocials() {
+  const icons = {
+    youtube:   { icon: "▶", label: "YouTube",   color: "#FF0000", bg: "#fff0f0" },
+    facebook:  { icon: "f", label: "Facebook",  color: "#1877F2", bg: "#f0f7ff" },
+    instagram: { icon: "📸", label: "Instagram", color: "#E4405F", bg: "#fff0f5" },
+    pinterest: { icon: "P", label: "Pinterest", color: "#E60023", bg: "#fff0f0" },
+    tiktok:    { icon: "♪", label: "TikTok",    color: "#000000", bg: "#f5f5f5" },
+  };
+  const container = document.getElementById('footerSocials');
+  if (!container) return;
+  container.innerHTML = '';
+  Object.entries(SOCIAL_LINKS).forEach(([platform, url]) => {
+    if (!url) return;
+    const s = icons[platform];
+    const a = document.createElement('a');
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.title = s.label;
+    a.style.cssText = `display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;background:${s.bg};color:${s.color};font-weight:900;font-size:1rem;text-decoration:none;border:1px solid ${s.color}33;transition:transform 0.2s,box-shadow 0.2s;`;
+    a.innerHTML = s.icon;
+    a.onmouseover = () => { a.style.transform='translateY(-3px)'; a.style.boxShadow=`0 6px 16px ${s.color}44`; };
+    a.onmouseout  = () => { a.style.transform=''; a.style.boxShadow=''; };
+    container.appendChild(a);
+  });
+}
+
+let searchTimer = null;
+
+function searchProducts(query) {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    const q = query.toLowerCase().trim();
+
+    // Show/hide clear button
+    const clearBtn = document.getElementById('searchClearBtn');
+    const iconBtn  = document.getElementById('searchIconBtn');
+    if (q.length > 0) {
+      clearBtn.style.display = 'block';
+      iconBtn.style.display  = 'none';
+    } else {
+      clearBtn.style.display = 'none';
+      iconBtn.style.display  = 'block';
+    }
+
+    const filtered = q
+      ? products.filter(p =>
+          p.name.toLowerCase().includes(q) ||
+          p.cat.toLowerCase().includes(q) ||
+          (p.features && p.features.some(f => f.toLowerCase().includes(q)))
+        )
+      : products;
+
+    renderProducts(filtered);
+
+    // Show no-results message if nothing found
+    const noResults = document.getElementById('noResults');
+    const loadWrap  = document.getElementById('loadMoreWrap');
+    if (filtered.length === 0) {
+      noResults.style.display = 'block';
+      if (loadWrap) loadWrap.style.display = 'none';
+    } else {
+      noResults.style.display = 'none';
+    }
+
+    // Scroll to products section smoothly
+    if (q.length > 0) {
+      document.getElementById('products').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, 200);
+}
+
+function clearSearch() {
+  const input = document.getElementById('searchInput');
+  input.value = '';
+  searchProducts('');
+  input.focus();
+}
+
+function filterProducts(category, btn) {
+  // Also clear search when switching tabs
+  const input = document.getElementById('searchInput');
+  input.value = '';
+  document.getElementById('searchClearBtn').style.display = 'none';
+  document.getElementById('searchIconBtn').style.display  = 'block';
+  document.getElementById('noResults').style.display = 'none';
+
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const filtered = category === 'all' ? products : products.filter(p => p.cat === category);
+  renderProducts(filtered);
+  renderCompare(filtered);
+}
+
+function toggleMobileNav() {
+  const nav = document.getElementById('mobileNav');
+  nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+}
+
+function handleScrollReveal() {
+  const reveals = document.querySelectorAll('.reveal');
+  reveals.forEach(el => {
+    const windowHeight = window.innerHeight;
+    const revealTop = el.getBoundingClientRect().top;
+    if (revealTop < windowHeight - 100) el.classList.add('active');
+  });
+}
+
+window.addEventListener('scroll', handleScrollReveal, { passive: true });
+document.addEventListener('DOMContentLoaded', () => {
+  renderProducts(products);
+  renderCompare(products);
+  renderSocials();
+  handleScrollReveal();
+
+  // Wire up search input — works on mobile, desktop, and iPhone
+  const input = document.getElementById('searchInput');
+  input.addEventListener('input',   () => searchProducts(input.value));
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); searchProducts(input.value); } });
+  document.getElementById('searchIconBtn').addEventListener('click', () => searchProducts(input.value));
+});
+</script>
+</body>
+</html>
