@@ -13,7 +13,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Click2Cart – Best Amazon Product Reviews & Deals</title>
 <meta name="description" content="Expert Amazon product reviews, comparisons, and buying guides. Find the best deals with honest recommendations.">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /*============================================
   CONFIGURATION — EDIT YOUR AFFILIATE TAG HERE
@@ -43,7 +43,7 @@ html{scroll-behavior:smooth;font-size:16px;}
 body{
   background:var(--bg);
   color:var(--text);
-  font-family:'Plus Jakarta Sans',sans-serif;
+  font-family:'Inter',sans-serif;
   line-height:1.65;
   overflow-x:hidden;
 }
@@ -79,8 +79,7 @@ nav{
   padding:0 24px;gap:24px;
 }
 .logo{
-  font-family:'Playfair Display',serif;
-  font-size:1.6rem;
+  font-family:'DM Serif Display',serif;
   font-weight:800;
   color:var(--text);
   text-decoration:none;
@@ -162,7 +161,7 @@ nav{
   animation:fadeUp 0.6s ease both;
 }
 .hero h1{
-  font-family:'Playfair Display',serif;
+  font-family:'DM Serif Display',serif;
   font-size:clamp(2.2rem,5vw,4rem);
   font-weight:800;line-height:1.1;
   max-width:760px;margin:0 auto 20px;
@@ -200,7 +199,7 @@ section{padding:72px 24px;}
 .container{max-width:1200px;margin:0 auto;}
 .section-header{text-align:center;margin-bottom:56px;}
 .section-title{
-  font-family:'Playfair Display',serif;
+  font-family:'DM Serif Display',serif;
   font-size:2.4rem;font-weight:800;margin-bottom:16px;
 }
 .section-title em{font-style:normal;color:var(--primary);}
@@ -264,32 +263,15 @@ section{padding:72px 24px;}
 .p-content{padding:24px;flex:1;display:flex;flex-direction:column;}
 .p-cat{font-size:0.75rem;font-weight:700;color:var(--primary);text-transform:uppercase;margin-bottom:8px;}
 .p-title{
-  font-family:'Playfair Display',serif;
+  font-family:'DM Serif Display',serif;
   font-size:1.15rem;font-weight:800;line-height:1.3;
   margin-bottom:12px;color:var(--text);
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
-.p-meta{
-  display:flex;align-items:center;gap:10px;margin-bottom:18px;
-  font-size:0.85rem;font-weight:600;
-}
-.p-rating{color:#fbbf24;display:flex;align-items:center;gap:4px;}
-.p-reviews{color:var(--muted);font-weight:400;}
-
 .p-price-row{
   display:flex;align-items:baseline;gap:10px;margin-bottom:20px;
 }
 .p-price{font-size:1.5rem;font-weight:800;color:var(--text);}
-.p-orig{font-size:0.95rem;text-decoration:line-through;color:var(--muted);}
-
-.p-features{
-  list-style:none;margin-bottom:24px;
-}
-.p-features li{
-  font-size:0.85rem;color:var(--muted);
-  display:flex;align-items:center;gap:8px;margin-bottom:6px;
-}
-.p-features li::before{content:'✓';color:var(--accent2);font-weight:900;}
 
 .btn-amazon{
   display:flex;align-items:center;justify-content:center;gap:8px;
@@ -446,7 +428,6 @@ footer{
   .p-content{padding:14px;}
   .p-title{font-size:0.95rem;}
   .p-price{font-size:1.2rem;}
-  .p-features{display:none;}
   .btn-amazon{padding:11px 14px;font-size:0.85rem;}
 
   /* Load more */
@@ -547,7 +528,7 @@ a,button{touch-action:manipulation;}
     <!-- NO RESULTS MESSAGE -->
     <div id="noResults" style="display:none;text-align:center;padding:60px 20px;">
       <div style="font-size:3rem;margin-bottom:16px;">🔍</div>
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:10px;">No products found</h3>
+      <h3 style="font-family:'DM Serif Display',serif;font-size:1.5rem;margin-bottom:10px;">No products found</h3>
       <p style="color:var(--muted);margin-bottom:24px;">Try a different keyword or browse by category above.</p>
       <button onclick="clearSearch()" style="background:var(--primary);color:#fff;border:none;padding:12px 28px;border-radius:100px;font-weight:700;font-size:0.95rem;cursor:pointer;">Clear Search</button>
     </div>
@@ -577,7 +558,6 @@ a,button{touch-action:manipulation;}
             <th>Product Name</th>
             <th>Category</th>
             <th>Rating</th>
-            <th>Price</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -812,20 +792,9 @@ function cardHTML(p) {
       <div class="p-content">
         <div class="p-cat">${p.cat}</div>
         <h3 class="p-title">${p.name}</h3>
-        <div class="p-meta">
-          <div class="p-rating">★ ${p.rating}</div>
-          <div class="p-reviews">(${p.rcount} reviews)</div>
-        </div>
-        <div class="p-price-row">
-          <span class="p-price">${p.price}</span>
-          ${p.orig ? `<span class="p-orig">${p.orig}</span>` : ''}
-        </div>
-        <ul class="p-features">
-          ${p.features.map(f => `<li>${f}</li>`).join('')}
-        </ul>
         <a href="${buildAmazonLink(p.asin)}" target="_blank" rel="noopener" class="btn-amazon">
-          View on Amazon
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          Buy Now
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
         </a>
       </div>
     </div>`;
@@ -897,7 +866,6 @@ function renderCompare(list) {
       </td>
       <td>${p.cat}</td>
       <td><div class="p-rating" style="font-weight:700;">★ ${p.rating}</div></td>
-      <td style="font-weight:800;">${p.price}</td>
       <td><a href="${buildAmazonLink(p.asin)}" target="_blank" style="color:var(--primary); font-weight:700; text-decoration:none;">View Deal →</a></td>
     </tr>
   `).join('');
