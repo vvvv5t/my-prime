@@ -700,12 +700,22 @@ let products = [
   { id: 53, name: "Watermelon Cutter", cat: "Home & Kitchen", rating: 4.5, rcount: "1,000", asin: "https://amzn.to/4dCm9jW", img: "https://m.media-amazon.com/images/I/6161sbGOeyL._AC_SL1481_.jpg", badge: "best-seller" },
   { id: 54, name: "Electric Bag Sealer", cat: "Home & Kitchen", rating: 4.5, rcount: "1,000", asin: "https://amzn.to/4nmZACY", img: "https://m.media-amazon.com/images/I/61QvxVFY2QL._AC_SL1500_.jpg", badge: "best-seller" },
   { id: 55, name: "Defrosting Tray", cat: "Home & Kitchen", rating: 4.5, rcount: "1,000", asin: "https://amzn.to/432Dcpc", img: "https://m.media-amazon.com/images/I/71-NPJa8f-L._AC_SL1500_.jpg", badge: "best-seller" },
-  { id: 56, name: "Electric Food Processor", cat: "Home & Kitchen", rating: 4.5, rcount: "1,000", asin: "https://amzn.to/4tDqKr6", img: "https://m.media-amazon.com/images/I/81wcKr7T8yL._AC_SL1500_.jpg", badge: "best-seller" }
+  { id: 56, name: "Electric Food Processor", cat: "Home & Kitchen", rating: 4.5, rcount: "1,000", asin: "https://amzn.to/4tDqKr6", img: "https://m.media-amazon.com/images/I/81wcKr7T8yL._AC_SL1500_.jpg", badge: "best-seller" },
+  { id: 57, name: "Lazy Susan Revolution", cat: "Home & Kitchen", rating: 4.5, rcount: "1,000", asin: "https://amzn.to/4dkW7As", img: "https://m.media-amazon.com/images/I/61NM4+xE1-L._AC_SL1000_.jpg", badge: "best-seller" },
+  { id: 58, name: "Auto-Rolling Egg Dispenser", cat: "Home & Kitchen", rating: 4.5, rcount: "1,000", asin: "https://amzn.to/3RaIxZ0", img: "https://m.media-amazon.com/images/I/51HXnCsx3GL._AC_SL1000_.jpg", badge: "best-seller" },
+  { id: 59, name: "Foldable Wooden Trivet Tree Set", cat: "Home & Kitchen", rating: 4.5, rcount: "1,000", asin: "https://amzn.to/4tHFKEd", img: "https://m.media-amazon.com/images/I/71oY2RNgHLL._AC_SL1500_.jpg", badge: "best-seller" },
+  { id: 60, name: "Stainless Steel Dip Chiller Bowl", cat: "Home & Kitchen", rating: 4.5, rcount: "1,000", asin: "https://amzn.to/48WMAOM", img: "https://m.media-amazon.com/images/I/71KVwUCBUHL._AC_SL1500_.jpg", badge: "best-seller" },
+  { id: 61, name: "Coffee Scoop & Funnel for K-Cups", cat: "Home & Kitchen", rating: 4.5, rcount: "1,000", asin: "https://amzn.to/4tA1X6Y", img: "https://m.media-amazon.com/images/I/61rob-8YPOL._AC_SL1500_.jpg", badge: "best-seller" },
+  { id: 62, name: "Ice Cube Tray", cat: "Home & Kitchen", rating: 4.5, rcount: "1,000", asin: "https://amzn.to/4dI00Rg", img: "https://m.media-amazon.com/images/I/71YEEu2MjxL._AC_SL1500_.jpg", badge: "best-seller" }
 ];
 
 /*============================================
   PAGINATION ENGINE — DO NOT EDIT BELOW
 ==============================================*/
+
+/* Show newest products first — reverse so the last item added appears at top */
+products.reverse();
+
 const PAGE_SIZE = 24;
 let currentPage = 0;
 let activeList = [];
