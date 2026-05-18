@@ -563,7 +563,7 @@ a,button{touch-action:manipulation;}
         </thead>
         <tbody id="compareBody">
           </tbody>
-       </table>
+        </table>
     </div>
   </div>
 </section>
@@ -639,7 +639,7 @@ const SOCIAL_LINKS = {
 };
 
 /*============================================
-  COMPLETE PRODUCT DATABASE (ORIGINAL + 6 NEW SUSTAINABLE PRODUCTS)
+  COMPLETE PRODUCT DATABASE (ORIGINAL + 6 NEW SUSTAINABLE + 5 NEW PRODUCTS)
 ==============================================*/
 let products = [
   // --- ORIGINAL PRODUCTS (1-32) ---
@@ -676,7 +676,7 @@ let products = [
   { id: 31, name: "Iron Skillet", cat: "Home & Kitchen", rating: 4.5, rcount: "1,000", asin: "https://amzn.to/41U09um", img: "https://m.media-amazon.com/images/I/71iH2iNxTZL._AC_SL1500_.jpg", badge: "best-seller" },
   { id: 32, name: "Rotary Cheese Grater", cat: "Home & Kitchen", rating: 4.5, rcount: "1,000", asin: "https://amzn.to/4cQ0XFK", img: "https://m.media-amazon.com/images/I/71dQkm1Q5ML._AC_SL1500_.jpg", badge: "best-seller" },
 
-  // --- 6 NEW SUSTAINABLE PRODUCTS (Added as requested) ---
+  // --- 6 NEW SUSTAINABLE PRODUCTS ---
   { id: 33, name: "Beeswax Wraps", cat: "Sustainable Products", price: "$14.99", orig: "$19.99", rating: 4.7, rcount: "8,230", asin: "https://amzn.to/4tf6vji", img: "https://m.media-amazon.com/images/I/71uniQJ-tCL._AC_SL1500_.jpg", badge: "eco-friendly", features: ["Reusable food wrap","Natural beeswax coating","Biodegradable & zero waste","Keeps food fresh","Set of 3 sizes","Washable and long-lasting"] },
   { id: 34, name: "Hand Soap Tablets", cat: "Sustainable Products", price: "$12.95", orig: "$16.99", rating: 4.6, rcount: "3,540", asin: "https://amzn.to/42HmDyQ", img: "https://m.media-amazon.com/images/I/71RO8TA4iOL._SL1500_.jpg", badge: "eco-friendly", features: ["Plastic-free soap tablets","Just add water","Vegan & cruelty-free","Zero waste packaging","Luxurious foam","Essential oil scents"] },
   { id: 35, name: "Reusable Freezer Bag", cat: "Sustainable Products", price: "$16.95", orig: "$22.95", rating: 4.8, rcount: "5,120", asin: "https://amzn.to/4cVdIyH", img: "https://m.media-amazon.com/images/I/81vX7DWJFeL._AC_SL1500_.jpg", badge: "best-seller", features: ["10-pack silicone bags","Leak-proof & airtight","Dishwasher safe","Replace 1000s of plastic bags","Lay-flat design","BPA-free & food-grade"] },
@@ -706,7 +706,14 @@ let products = [
   { id: 59, name: "Foldable Wooden Trivet Tree Set", cat: "Home & Kitchen", rating: 4.5, rcount: "1,000", asin: "https://amzn.to/4tHFKEd", img: "https://m.media-amazon.com/images/I/71oY2RNgHLL._AC_SL1500_.jpg", badge: "best-seller" },
   { id: 60, name: "Stainless Steel Dip Chiller Bowl", cat: "Home & Kitchen", rating: 4.5, rcount: "1,000", asin: "https://amzn.to/48WMAOM", img: "https://m.media-amazon.com/images/I/71KVwUCBUHL._AC_SL1500_.jpg", badge: "best-seller" },
   { id: 61, name: "Coffee Scoop & Funnel for K-Cups", cat: "Home & Kitchen", rating: 4.5, rcount: "1,000", asin: "https://amzn.to/4tA1X6Y", img: "https://m.media-amazon.com/images/I/61rob-8YPOL._AC_SL1500_.jpg", badge: "best-seller" },
-  { id: 62, name: "Ice Cube Tray", cat: "Home & Kitchen", rating: 4.5, rcount: "1,000", asin: "https://amzn.to/4dI00Rg", img: "https://m.media-amazon.com/images/I/71YEEu2MjxL._AC_SL1500_.jpg", badge: "best-seller" }
+  { id: 62, name: "Ice Cube Tray", cat: "Home & Kitchen", rating: 4.5, rcount: "1,000", asin: "https://amzn.to/4dI00Rg", img: "https://m.media-amazon.com/images/I/71YEEu2MjxL._AC_SL1500_.jpg", badge: "best-seller" },
+
+  // ========== 5 NEW PRODUCTS ADDED ==========
+  { id: 63, name: "Rotating Snack Tray", cat: "Home & Kitchen", price: "$24.99", orig: "$32.99", rating: 4.6, rcount: "1,245", asin: "https://amzn.to/4v0hJJM", img: "https://m.media-amazon.com/images/I/61X2O4tvZJL._AC_SL1500_.jpg", badge: "best-seller", features: ["360° rotating design","Perfect for parties & snacks","Sturdy bamboo construction","Non-slip base","Easy to clean"] },
+  { id: 64, name: "Electric Grape & Garlic Peeler", cat: "Home & Kitchen", price: "$19.99", orig: "$29.99", rating: 4.4, rcount: "892", asin: "https://amzn.to/42I4H7r", img: "https://m.media-amazon.com/images/I/71Zv7mfFonL._AC_SL1500_.jpg", badge: "top-pick", features: ["Effortless peeling for grapes & garlic","Battery operated","Saves time in kitchen","Compact & easy storage","Includes cleaning brush"] },
+  { id: 65, name: "Mini Handheld Sewing Machine", cat: "Home & Kitchen", price: "$15.99", orig: "$25.99", rating: 4.3, rcount: "3,210", asin: "https://amzn.to/4ukfUaA", img: "https://m.media-amazon.com/images/I/71mBjp391dL._AC_SL1500_.jpg", badge: "best-seller", features: ["Portable & lightweight","Electric & manual modes","Perfect for quick repairs","Includes accessories kit","Durable metal mechanism"] },
+  { id: 66, name: "Mesh Food Cover Tent", cat: "Home & Kitchen", price: "$12.99", orig: "$18.99", rating: 4.5, rcount: "5,678", asin: "https://amzn.to/49DyHFk", img: "https://m.media-amazon.com/images/I/71hQoN+be9L._AC_SL1500_.jpg", badge: "best-seller", features: ["Reusable mesh cover","Protects food from insects","Breathable & dishwasher safe","Foldable design for storage","Set of 4 sizes included"] },
+  { id: 67, name: "Shower Cleaning Robot", cat: "Home & Kitchen", price: "$49.99", orig: "$79.99", rating: 4.2, rcount: "450", asin: "https://amzn.to/3PmDPa5", img: "https://m.media-amazon.com/images/I/712I99JlxXL._AC_SL1500_.jpg", badge: "top-pick", features: ["Automated shower glass cleaning","Water-resistant design","Rechargeable battery","Scrubs & dries","Saves manual effort"] }
 ];
 
 /*============================================
